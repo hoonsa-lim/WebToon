@@ -5,4 +5,16 @@
     <string name="web_toon">웹툰</string>
     <string name="my_library">내서재</string>
     <string name="login">로그인</string>
+    <string name="search_contents">컨텐츠 검색</string>
+    <string name="top">TOP</string>
+    <string name="serial">연재</string>
+    <string name="finished">완결</string>
+    <string name="comics">코믹스</string>
+    <string name="free">무료</string>
+    <string name="sale">SALE</string>
+    <string name="fantasy_martial">판무</string>
+    <string name="romance">로맨스</string>
+    <string name="fantasy_romance">로판</string>
+    <string name="boys_love">BL</string>
+    <string name="special">스페셜</string>
 </resources>

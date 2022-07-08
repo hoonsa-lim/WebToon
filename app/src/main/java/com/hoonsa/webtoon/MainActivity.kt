@@ -17,18 +17,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.android.animation.SegmentType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.hoonsa.webtoon.MainActivity.Companion.TAG
+import com.hoonsa.webtoon.ui.common.MajorCategory
+import com.hoonsa.webtoon.ui.common.MajorCategoryItemUiState
+import com.hoonsa.webtoon.ui.common.MajorCategoryUiState
+import com.hoonsa.webtoon.ui.extension.Border
+import com.hoonsa.webtoon.ui.extension.border
 import com.hoonsa.webtoon.ui.theme.Sizes
 import com.hoonsa.webtoon.ui.theme.WebToonTheme
 
 class MainActivity : ComponentActivity() {
+    companion object{
+        const val TAG = "MainActivity"
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,13 +66,36 @@ fun MainView() {
 
 @Composable
 fun MainScreenContainer(height: Dp) {
+    val items = listOf(
+//            MajorCategoryItemUiState(text = R.string.web_toon){ Log.d(TAG, "MainView: item click") },
+        MajorCategoryItemUiState(text = R.string.top){ Log.d(TAG, "MainView: item click") },
+        MajorCategoryItemUiState(text = R.string.serial){ Log.d(TAG, "MainView: item click") },
+        MajorCategoryItemUiState(text = R.string.finished){ Log.d(TAG, "MainView: item click") },
+        MajorCategoryItemUiState(text = R.string.comics, isSelected = true){ Log.d(TAG, "MainView: item click") },
+        MajorCategoryItemUiState(text = R.string.free, showDot = true){ Log.d(TAG, "MainView: item click") },
+        MajorCategoryItemUiState(text = R.string.sale){ Log.d(TAG, "MainView: item click") },
+//            MajorCategoryItemUiState(text = R.string.fantasy_martial){ Log.d(TAG, "MainView: item click") },
+//            MajorCategoryItemUiState(text = R.string.romance){ Log.d(TAG, "MainView: item click") },
+//            MajorCategoryItemUiState(text = R.string.fantasy_romance){ Log.d(TAG, "MainView: item click") },
+//            MajorCategoryItemUiState(text = R.string.boys_love){ Log.d(TAG, "MainView: item click") },
+//            MajorCategoryItemUiState(text = R.string.special){ Log.d(TAG, "MainView: item click") },
+    )
+    val majorCategoryUiState = MajorCategoryUiState(items, R.drawable.icon_search, R.string.search_contents){
+        Log.d(TAG, "MainView: click search icon")
+    }
+
     BoxWithConstraints(
         Modifier
             .background(color = MaterialTheme.colorScheme.background)
             .fillMaxWidth()
             .height(height)
     ) {
-        Text(text = "asdf")
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Bottom
+        ) {
+            MajorCategory(majorCategoryUiState)
+        }
     }
 }
 
@@ -80,7 +112,8 @@ fun BottomNavigationBar(height: Dp) {
             .background(color = MaterialTheme.colorScheme.background)
             .fillMaxWidth()
             .height(height)
-            .padding(horizontal = Sizes.paddingDefault),
+            .border(top = Border(Sizes.borderWidth, Color.LightGray))
+            .padding(horizontal = Sizes.padding),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
